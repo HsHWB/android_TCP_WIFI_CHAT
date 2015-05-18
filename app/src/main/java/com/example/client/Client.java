@@ -25,6 +25,7 @@ public class Client {
     private Socket socket;
     private String getMsg;
     private String pullMsg;
+    private Thread mThread;
 
     /**
      * 传入端口以及客户聊天对应的textview
@@ -37,7 +38,8 @@ public class Client {
             socket = new Socket(Constant.SERVICE_HOST, Constant.SERVICE_PORT);
             br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()), true);
-
+            mThread = new Thread(mRunnable);
+            mThread.start();//查看服务器是否推了信息过来
         }catch (IOException e){
             System.out.println("Service ");
         }
@@ -71,9 +73,11 @@ public class Client {
     public void msgToService(String msg){
         pw.print(msg);
         pw.flush();//刷新缓冲区马上发送服务端
+        if ( !mThread.isAlive() ){//如果在创建客户端对象的时候服务器没有首先推送过来则线程不会终止
+            mThread = new Thread(mRunnable);
+            mThread.start();
+        }
     }
-
-
 
     public int getSERVICE_PORT(){
         return SERVICE_PORT;
@@ -88,7 +92,7 @@ public class Client {
         public void handleMessage(Message msg){
 
             if (msg.what == 0x123){
-
+                mThread = null;
             }
 
         }

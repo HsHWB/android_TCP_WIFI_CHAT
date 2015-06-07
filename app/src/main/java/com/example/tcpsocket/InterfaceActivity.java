@@ -5,14 +5,34 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.example.client.Client;
+import com.example.utils.Constant;
 
 
 public class InterfaceActivity extends Activity {
+
+    private EditText editText;
+    private Button sendButton;
+    private Client client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
+        editText = (EditText)this.findViewById(R.id.edittext);
+        sendButton = (Button)this.findViewById(R.id.sendButton);
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client = new Client(Constant.SERVICE_HOST, editText);
+            }
+        });
+
     }
 
 

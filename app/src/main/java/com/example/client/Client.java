@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -32,7 +33,7 @@ public class Client {
      * @param port
      * @param textView
      */
-    public Client(String port, TextView textView){
+    public Client(String port, EditText textView){
         //Socket实例化，连接服务器
         try {
             socket = new Socket(Constant.SERVICE_HOST, Constant.SERVICE_PORT);

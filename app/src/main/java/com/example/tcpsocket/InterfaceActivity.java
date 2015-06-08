@@ -1,7 +1,7 @@
 package com.example.tcpsocket;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
+import android.os.StrictMode;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +23,10 @@ public class InterfaceActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interface);
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         editText = (EditText)this.findViewById(R.id.edittext);
         sendButton = (Button)this.findViewById(R.id.sendButton);
 

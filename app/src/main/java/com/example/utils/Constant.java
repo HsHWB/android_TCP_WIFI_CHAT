@@ -6,6 +6,6 @@ package com.example.utils;
 public class Constant {
 
     public static int SERVICE_PORT = 4800;
-    public static String SERVICE_HOST = "127.0.0.1";
+    public static String SERVICE_HOST = "172.16.42.141";
 
 }

@@ -24,16 +24,16 @@ public class Client {
     private BufferedReader br;
     private PrintWriter pw;
     private Socket socket;
-    private String getMsg;
-    private String pullMsg;
+    private String getMsg;//get message from server
+    private String pullMsg = "";//send to server
     private Thread mThread;
 
     /**
      * 传入端口以及客户聊天对应的textview
      * @param port
-     * @param textView
+     * @param editText
      */
-    public Client(String port, EditText textView){
+    public Client(String port, EditText editText){
         //Socket实例化，连接服务器
         try {
             socket = new Socket(Constant.SERVICE_HOST, Constant.SERVICE_PORT);
@@ -54,7 +54,7 @@ public class Client {
                 try{
                     if ( (getMsg = br.readLine()) != null ){
                         pullMsg += getMsg;
-                        System.out.println("Client  pullMsg == " + pullMsg);
+                        System.out.println("Client  pullMsg == " + pullMsg +"    are you ok");
                     }else{
                         break;
                     }
